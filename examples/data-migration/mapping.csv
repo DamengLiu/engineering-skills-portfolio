@@ -1,0 +1,6 @@
+source,target,transform
+legacy_order_id,order_id,direct
+legacy_customer_id,customer_id,direct
+legacy_total,amount_cents,decimal_to_cents
+legacy_status,status,status_lookup
+created_ts,created_at_utc,normalize_utc
