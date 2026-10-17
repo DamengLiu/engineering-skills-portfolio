@@ -1,4 +1,4 @@
-"""Behavioral checks for the fictional migration's offline validator."""
+"""虚构迁移离线检查器的行为测试 / Offline validator behavior tests."""
 
 import json
 import tempfile
@@ -26,7 +26,8 @@ class ColumnCheckTests(unittest.TestCase):
             changed_manifest.write_text(json.dumps(manifest), encoding="utf-8")
             errors = validate_mapping(
                 EXAMPLE_DIR / "mapping.csv", changed_manifest)
-        self.assertIn("writer column order differs from mapping", errors)
+        self.assertEqual(len(errors), 1)
+        self.assertIn("writer column order differs from mapping", errors[0])
 
 
 if __name__ == "__main__":
