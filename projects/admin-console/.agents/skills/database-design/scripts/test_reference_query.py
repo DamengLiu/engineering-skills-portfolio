@@ -41,13 +41,13 @@ class QueryTests(unittest.TestCase):
 
     def test_ambiguous_primitive_and_unknown(self):
         result = rq.query(REFS, ["ACT"], "primitive")
-        self.assertEqual(len(self.rows(result, "primitive")), 4)
+        self.assertEqual(len(self.rows(result, "primitive")), 5)
         result = rq.query(REFS, ["NO_SUCH_FIELD_X"])
         self.assertFalse(result["found"])
         self.assertEqual(result["unmatched_terms"], ["NO_SUCH_FIELD_X"])
 
     def test_source_lines_and_all_rows_parse(self):
-        expected = {"field": 4}
+        expected = {"field": 132, "domain": 46, "primitive": 82}
         for kind, (name, width) in rq.CATALOGS.items():
             doc = rq.read_catalog(REFS / name, width)
             if kind in expected:
