@@ -57,7 +57,7 @@
 
 五阶段的关键不是增加表单，而是防止上一阶段的不确定性被下一阶段当成事实。[虚构订单案例](data-migration/examples/README.md)故意把 Writer 一列改错：离线测试会拒绝这个结构错误。案例同时保留金额、状态和时间转换的语义问题，提醒读者结构检查无法证明转换值正确。[错误模式集](data-migration/.agents/skills/datax-table-migration/references/failure-patterns.md)还记录日期参数在 Shell 与作业间丢失、作业成功但脏数据未核验等失效条件；这些模式是排查线索，最终结论仍须回到当前表证据。
 
-## 案例二：管理后台局部修改的决策过程
+## 案例二：企业管理平台局部修改的决策过程
 
 企业管理平台的“小改动”可能落在同名动态页面、公共接口、权限或状态转换上。这里按[局部修改 Skill](enterprise-management-platform/.agents/skills/mgt-modification/SKILL.md)的**决策顺序**组织阅读，不把它改称原文并不存在的固定五阶段。
 
@@ -91,7 +91,7 @@
 
 证据分三类呈现：Skill 与 `AGENTS.md` 说明**设计规则**；离线脚本和测试给出**可复验的局部结果**；脱敏案例记录**真实工程中已确认的问题模式、阶段决策和验收思路**。完整交付的分阶段样例还说明应以需求版本、批次自检、功能清单和回显核验支撑成效结论。本仓库没有可公开复验的生产迁移或后台端到端运行结果，因此不把前两类证据扩大为真实运行成效。
 
-仓库提供可运行的**离线证据**。以下命令使用虚构样例或临时数据，不连接数据库、不执行 DataX，也不启动管理后台：
+仓库提供可运行的**离线证据**。以下命令使用虚构样例或临时数据，不连接数据库、不执行 DataX，也不启动企业管理平台：
 
 ```bash
 python -X utf8 data-migration/examples/check_job_columns.py data-migration/examples/mapping.csv data-migration/examples/job-manifest.json
