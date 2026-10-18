@@ -61,8 +61,3 @@ description: 设计、更新和检查多个独立 DataX 单表作业的批量编
 - 交付批次结论或生成模块 README 时，阅读 [批次收尾](references/05-batch-closeout.md)。
 
 新生成符合标准任务清单的批量交付物后，从项目根目录运行 `py .agents/skills/datax-batch-migration/scripts/check_batch_artifacts.py <批次目录>`；检查既有模块时先核对其真实结构，不能因它采用固定清单或共享入口就套用此检查器。离线检查不代替数据库前检、迁移执行和数据校验。各已执行阶段的整体状态只使用 `Success` 和 `Failure`；暂缓事项单独记录，不改变已完成阶段的状态或退出码。
-
-
-## 6. 英文译文 | English translation
-
-This reference belongs to the DataX migration project. Follow the Chinese workflow above for scope, mapping, execution, and verification. Confirm project-specific field semantics and obtain explicit authorization before database access or migration execution.

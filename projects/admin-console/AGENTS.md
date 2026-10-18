@@ -98,7 +98,3 @@ Controller 只负责接收请求、基础校验、调用 Service 和返回统一
 完成后检查本次 diff、遗漏 import、重复代码、调试代码、接口和业务行为影响；执行与改动匹配的编译、测试或静态检查。无法验证时明确说明原因和未验证范围。
 
 涉及管理后台页面、接口、权限、双签或前后端联动修改时，使用 `mgt-modification` Skill 进行范围定位、受控实施和分级验收。项目通用规则以本文件为准，Skill 仅补充任务路由和管理后台特有约束。
-
-## 8. 英文译文 | English translation
-
-Inspect the target entry point and comparable code before changing behavior. Preserve the established Controller, Service, Mapper, SDK, error-code, logging, permission, idempotency, and dual-approval conventions. Use the linked database, feature-delivery, and modification skills according to the requested scope. Review the diff and run focused checks; report checks that could not be run. Product-specific component names in this public copy are role descriptions and must be resolved from the target project.

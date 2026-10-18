@@ -17,7 +17,3 @@
 | DECISION_STATUS | 决定状态 | NO | 不同意 | 决定 | 虚构样例 v1 | 不与审核码等价 |
 | IS_ARCHIVED | 归档标志 | 0 | 否 | 文档 | 虚构样例 v1 | 当前编码 |
 | IS_ARCHIVED | 归档标志 | 1 | 是 | 文档 | 虚构样例 v1 | 当前编码 |
-
-## English translation
-
-The seven-column data is fictional. Related codes are not interchangeable. Query every value and governance note for the selected scenario; verify retired codes against approved project data.

@@ -21,8 +21,3 @@
 已执行任务失败、必要结果缺失或本次要求的校验失败时，相应阶段记 `Failure`。本次未要求或未授权的数据核验写“暂缓/未执行”，保留原因和待办；不称“不通过”，也不称“已通过”。已开展且发现异常的必要检查仍按事实记录。执行检查的 `Success` 不自动等于数据核验通过。
 
 新增跨表关系、业务抽样等检查时，先写明数据来源、通过条件和查询授权。
-
-
-## 4.4 英文译文 | English translation
-
-This reference belongs to the DataX migration project. Follow the Chinese workflow above for scope, mapping, execution, and verification. Confirm project-specific field semantics and obtain explicit authorization before database access or migration execution.

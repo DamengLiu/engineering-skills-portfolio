@@ -152,8 +152,3 @@ mapping 需单列“字段加密”小节，以 `目标加密字段：` 后逐�
 - 不存在截断、舍入或其他数据损失规则。
 
 任一条件未满足时，状态为 `需求确认待定`，只输出需求基线、字段映射和待确认项。
-
-
-## 1.12 英文译文 | English translation
-
-This reference belongs to the DataX migration project. Follow the Chinese workflow above for scope, mapping, execution, and verification. Confirm project-specific field semantics and obtain explicit authorization before database access or migration execution.

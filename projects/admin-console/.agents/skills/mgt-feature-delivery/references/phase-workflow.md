@@ -29,7 +29,3 @@ API 文档仅在接口设计阶段或确需先行明确时建立。记录 URL、
 在全部功能开发完成后，根据 PRD 的核心主流程、扩展流程和已确认边界建立功能性测试记录。明确每项为通过、失败、阻塞或未测，并记录复现条件和结果证据。
 
 当前不要求单元测试。未来用户决定引入时，优先将其写入对应开发批次的计划和记录，按实践逐步扩大覆盖范围。
-
-## 英文译文 | English translation
-
-This reference describes project-specific decisions and checks for the workflow above. The public examples use fictional names; confirm the actual component, field, and policy in the target project before applying them.

@@ -12,8 +12,3 @@
 | 清理或写入在失败后留下部分结果 | 清理范围、执行顺序和失败后的重跑边界不清 | 已写入范围、来源顺序、清理位置及恢复方案 |
 
 只把重复出现且可用明确条件判断的模式加入自动检查。其余模式保留为排查提示，避免前检随案例数量膨胀。
-
-
-## 6.1 英文译文 | English translation
-
-This reference belongs to the DataX migration project. Follow the Chinese workflow above for scope, mapping, execution, and verification. Confirm project-specific field semantics and obtain explicit authorization before database access or migration execution.

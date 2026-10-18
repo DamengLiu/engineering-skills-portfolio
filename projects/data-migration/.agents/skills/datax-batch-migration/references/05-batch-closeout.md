@@ -24,8 +24,3 @@
 ## 5.3 交接与收尾边界
 
 收尾不自动删除数据、创建快照、恢复或启动补传；这些动作需要独立的范围和授权。补跑清单只是后续工作的依据，不是自动重传承诺。按实际需要归档结果，不创建无人使用的空模板。
-
-
-## 5.4 英文译文 | English translation
-
-This reference belongs to the DataX migration project. Follow the Chinese workflow above for scope, mapping, execution, and verification. Confirm project-specific field semantics and obtain explicit authorization before database access or migration execution.

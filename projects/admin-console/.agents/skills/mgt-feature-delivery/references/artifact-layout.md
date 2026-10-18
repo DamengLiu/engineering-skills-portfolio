@@ -52,7 +52,3 @@ index.md                              当前状态、链接、变更记录、需
 
 - 新建或续接入口使用 [index 模板](../assets/index.template.md)。
 - 需要独立记录需求澄清时使用 [需求模板](../assets/requirement.template.md)。
-
-## 英文译文 | English translation
-
-This reference describes project-specific decisions and checks for the workflow above. The public examples use fictional names; confirm the actual component, field, and policy in the target project before applying them.

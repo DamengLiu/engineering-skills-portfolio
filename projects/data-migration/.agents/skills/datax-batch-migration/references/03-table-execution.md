@@ -17,8 +17,3 @@
 执行单元状态只用 `Success`、`Failure`；未执行、跳过和待优化项单列明细，不预先标为成功。所有计划单元都有结果或明确的未执行原因后，执行阶段才可收束。保存范围与日志，为后续补传提供依据；不自动重传。
 
 按月、按天切片、受控并发与自动补传属于后续能力。同一目标表默认不并行写入。
-
-
-## 3.4 英文译文 | English translation
-
-This reference belongs to the DataX migration project. Follow the Chinese workflow above for scope, mapping, execution, and verification. Confirm project-specific field semantics and obtain explicit authorization before database access or migration execution.

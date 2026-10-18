@@ -12,7 +12,3 @@
 | REQUEST_STATUS | 申请状态 | Request Status | varchar | 16 | DRAFT | 审批样例 | 虚构样例 v1 | 见字典完整值域 |
 | REVIEW_RESULT | 审核结果 | Review Result | varchar | 16 | 无 | 审批样例 | 虚构样例 v1 | 见字典完整值域 |
 | IS_ARCHIVED | 归档标志 | Archive Flag | tinyint | 1 | 0 | 文档样例 | 虚构样例 v1 | 0 否，1 是 |
-
-## 2. English translation
-
-This nine-column catalog is a fictional fixture for demonstrating exact, source-traceable lookups. Replace it with approved field definitions before using the skill in a real project.

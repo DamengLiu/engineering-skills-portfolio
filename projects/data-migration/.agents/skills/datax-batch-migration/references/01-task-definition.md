@@ -19,8 +19,3 @@
 批次基线至少列出环境、任务数、执行单元数、参数模式、日期范围、失败策略和本次要求的检查。预计记录数、历史吞吐量等属于当前批次的事实，保存在批次目录，不写进 Skill。不能确认的内容标为“待确认”，不凭名称生成可运行脚本。
 
 所有启用任务能定位唯一 Shell，范围与失败策略明确，才算任务定义完成；实际运行前还须确认环境、对象、范围和动作授权。并发、资源分组及补跑标识在有实际需要时再扩展。
-
-
-## 1.4 英文译文 | English translation
-
-This reference belongs to the DataX migration project. Follow the Chinese workflow above for scope, mapping, execution, and verification. Confirm project-specific field semantics and obtain explicit authorization before database access or migration execution.

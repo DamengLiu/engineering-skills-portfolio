@@ -30,8 +30,3 @@
 ## 5.4 结论要求
 
 交付时单独说明“结构闭环”和“语义映射复核”的结果。语义复核未执行、无法读取后处理逻辑，或数据库语义仍待验证时，明确写出范围和剩余风险；不得表述为“内容映射一致”。
-
-
-## 5.5 英文译文 | English translation
-
-This reference belongs to the DataX migration project. Follow the Chinese workflow above for scope, mapping, execution, and verification. Confirm project-specific field semantics and obtain explicit authorization before database access or migration execution.

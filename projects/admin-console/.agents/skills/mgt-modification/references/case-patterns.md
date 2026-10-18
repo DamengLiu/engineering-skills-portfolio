@@ -80,7 +80,3 @@
 - **容易误判**：把问题归因于缓存、后端字段或旧构建，继续在错误目录补丁。
 - **决策规则**：修改前建立页面身份证，优先检查运行时路由，再核对动态菜单或路由映射；候选不唯一时暂停写入并继续只读定位，仍无法确认时再澄清。
 - **验证**：菜单、URL、route、列表/详情组件、组件特征和 API 对应，截图关键字段可在目标组件定位。
-
-## 英文译文 | English translation
-
-This reference describes project-specific decisions and checks for the workflow above. The public examples use fictional names; confirm the actual component, field, and policy in the target project before applying them.

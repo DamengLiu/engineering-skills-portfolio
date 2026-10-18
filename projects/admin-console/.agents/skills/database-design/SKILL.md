@@ -112,7 +112,3 @@ python -B -X utf8 .agents/skills/database-design/scripts/reference_query.py REQU
 ## 输出要求
 
 按以下顺序简要汇报：设计依据、变更范围、SQL/回滚、受影响代码、验证结果和待确认风险。不要把完整公司规范重复写入需求方案。
-
-## 英文译文 | English translation
-
-Use this skill for the scope stated above. Keep the established workflow, authorization boundary, source evidence, and verification gates. Catalog entries and examples in this public project are illustrative; the target project's approved definitions take precedence.

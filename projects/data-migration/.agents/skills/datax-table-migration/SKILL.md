@@ -124,8 +124,3 @@ L0 仅在目标文件唯一、没有字段语义或运行条件变化时成立�
 ## 7. 迭代
 
 只把经过多个真实案例验证、会稳定改变判断的内容沉淀为通用规则。单表映射、键、结构和确认记录留在该表目录，不进入 Skill。
-
-
-## 8. 英文译文 | English translation
-
-This reference belongs to the DataX migration project. Follow the Chinese workflow above for scope, mapping, execution, and verification. Confirm project-specific field semantics and obtain explicit authorization before database access or migration execution.

@@ -214,7 +214,3 @@ Python 与 Shell 都应保证意图清晰、行为明确、错误可见和结果
 - 重复键、必填字段和关键业务字段核验通过。
 
 任一条件未满足，只能报告“未完成”或“执行失败”。
-
-## English translation / 英文译文
-
-Choose the matching skill for a new single-table migration, an existing single-table change, or batch coordination. Preserve the approved mapping and existing job behavior. Database access, DataX execution, DDL/DCL, and production actions require explicit authorization identifying environment, object, scope, and action. Static checks do not prove migration success; successful execution and data reconciliation are separate gates.

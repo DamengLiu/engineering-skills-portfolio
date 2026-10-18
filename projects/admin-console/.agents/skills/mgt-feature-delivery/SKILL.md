@@ -42,7 +42,3 @@ description: 用于管理后台项目中需沉淀需求材料的完整功能，�
 ## 完成与续接
 
 `index.md` 必须能回答：需求当前是什么、处于哪个阶段、已完成什么、下一步是什么、哪些结论仍待确认。功能完成后保留材料作为下一次迭代的输入；用户要求技术复盘或发布笔记时，再按目标项目的文档流程处理。
-
-## 英文译文 | English translation
-
-Use this skill for the scope stated above. Keep the established workflow, authorization boundary, source evidence, and verification gates. Catalog entries and examples in this public project are illustrative; the target project's approved definitions take precedence.

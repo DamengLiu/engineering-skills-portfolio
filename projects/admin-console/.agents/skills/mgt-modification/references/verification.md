@@ -52,7 +52,3 @@
 - 同一修改范围集中完成后再运行一次最低充分检查，失败时只针对失败范围追加检查。
 - 输出命令、退出码和关键摘要，不粘贴长日志。
 - 最终结果仅使用：已完成且已验证、已实现未运行验证、仅方案或 SQL、阻塞未完成。
-
-## 英文译文 | English translation
-
-This reference describes project-specific decisions and checks for the workflow above. The public examples use fictional names; confirm the actual component, field, and policy in the target project before applying them.

@@ -63,7 +63,3 @@ L0 只有在目标文件唯一、无动态路由歧义、无接口或数据语�
 ## 输出
 
 使用 `Done / Changed / Verified / Notes`，明确区分：已完成且已验证、已实现未运行验证、仅方案或 SQL、阻塞未完成。用户要求问题单或变更说明时，以最终事实概括原因、方案、影响范围和业务自测，不记录无关的模型或中间返工过程。
-
-## 英文译文 | English translation
-
-Use this skill for the scope stated above. Keep the established workflow, authorization boundary, source evidence, and verification gates. Catalog entries and examples in this public project are illustrative; the target project's approved definitions take precedence.

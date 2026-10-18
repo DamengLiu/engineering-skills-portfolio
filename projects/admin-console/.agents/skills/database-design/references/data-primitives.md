@@ -10,7 +10,3 @@
 | ACT | 活动 | Activity | 多义候选；核对词组语义 |
 | REQ | 申请 | Request | 示例缩写 |
 | STATUS | 状态 | Status | 有限值需查字典 |
-
-## English translation
-
-These fictional four-column primitives illustrate ambiguity handling and candidate naming. Confirm approved terminology before defining a real field.

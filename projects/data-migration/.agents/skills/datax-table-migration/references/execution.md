@@ -210,8 +210,3 @@ py .agents/skills/datax-table-migration/scripts/check_artifacts.py <目标表目
 该工具只做离线静态检查，不连接数据库，也不代替迁移前数据检查。整体状态只用 `Success` 和 `Failure`，提醒与未执行项单独记录。必需语法检查不可用时，完整交付检查未完成，不能报告 `脚本生成完成`；已执行检查的通过结果仍保留。
 
 检查器只支持可静态读取的作业常量、标准五列 mapping 和 Shell 中明确的 Python 文件引用。动态 SQL 表达式只检查静态形状；字段组、未识别的参数、SQL 语义、目标实际结构、字段含义、注释准确性及视觉排版需另行复核，不以文本匹配代替验证。完整交付所需检查均完成且通过后，才能报告 `脚本生成完成`。
-
-
-## 2.8 英文译文 | English translation
-
-This reference belongs to the DataX migration project. Follow the Chinese workflow above for scope, mapping, execution, and verification. Confirm project-specific field semantics and obtain explicit authorization before database access or migration execution.

@@ -17,8 +17,3 @@
 只改完成本次目标必需的文件。已有 `dx_encrypt` 的作业以当前 transformer 位置、参数形式和字段清单为实现基线，不自动重排、替换或批量覆盖。`*` 标记字段与现有 `ENCRYPT_COLUMNS` 不一致时，先报告差异，在本次授权修改 mapping 时记录；只有本次业务规则明确要求增删加密字段时，才同步改动受影响作业。保留有效注释和外部调用方式；规则变化时同步修订失效说明。若新需求涉及异常数据记录与恢复、分片、统一日志等额外能力，先单独完成设计判断，再由本 Skill 落实单表侧修改与验证。
 
 共享规则按需读取 [需求与字段映射](../../datax-table-migration/references/requirements.md) 和 [迁移执行](../../datax-table-migration/references/execution.md)。当前表特有规则留在有效 mapping。
-
-
-## 2.4 英文译文 | English translation
-
-This reference belongs to the DataX migration project. Follow the Chinese workflow above for scope, mapping, execution, and verification. Confirm project-specific field semantics and obtain explicit authorization before database access or migration execution.

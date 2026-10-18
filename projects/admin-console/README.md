@@ -1,19 +1,42 @@
-# 管理后台项目 | Admin Console Project
+# 管理后台功能交付项目 | Admin Console Delivery Project
 
-本项目按原有职责拆分为完整功能交付、局部修改和数据库设计。公开版保留需求材料、分批开发、页面与接口定位、双人复核、幂等、字段目录查询和分级验收的流程；专有组件名与真实业务目录已替换为角色描述及虚构样例。
+这个项目展示如何把“一个后台需求”从口头描述变成可续接、可定位、可验证的工程交付。它聚焦 Spring/MyBatis 风格的管理后台，但方法本身适用于需要页面、接口、权限、状态与数据模型协同的业务系统。
 
-## 阅读顺序
+## 面试官先看什么
 
-1. [项目约定](AGENTS.md)：分层、公共组件、权限、日志和验证规则。
-2. [完整功能交付](.agents/skills/mgt-feature-delivery/SKILL.md)：需求、原型、设计、开发批次与最终功能性测试。
-3. [局部修改](.agents/skills/mgt-modification/SKILL.md)：L0/L1/L2 风险分级、前后端路由与验收。
-4. [数据库设计](.agents/skills/database-design/SKILL.md)：规范、字段、字典和元语目录的按需查询。
-5. [虚构审批案例](examples/README.md)：展示三个 Skill 的协作边界。
+| 关注点 | 仓库中的回答 |
+| --- | --- |
+| 如何避免需求迭代后依据旧结论实现？ | [功能交付 Skill](.agents/skills/mgt-feature-delivery/SKILL.md)将当前有效需求、范围、待确认项、开发批次和最终测试材料串联到 `index.md`。 |
+| 如何判断改动风险，而不是凭代码行数猜测？ | [局部修改 Skill](.agents/skills/mgt-modification/SKILL.md)用 L0/L1/L2 区分唯一文件的低风险调整、常规页面/接口修改，以及公共契约、状态、权限、双人复核、外部调用和数据库设计。 |
+| 如何避免字段、码值和字典展示靠猜？ | [数据库设计 Skill](.agents/skills/database-design/SKILL.md)按需查询标准字段、完整值域和元语；工具带来源行号、关联提示和内容指纹。 |
+| 如何验证“改好了”覆盖了真正的调用链？ | 前端、后端、数据库、权限/双人复核分别有验证要求；实际采用哪些检查由风险等级和影响范围决定。 |
 
-## 公开样例的边界
+## 三条工作流
 
-字段、字典和元语文件保持原查询工具所需的 9/7/4 列结构，并使用虚构数据验证完整值域、关联码、废弃码及指纹失效。它们仅演示机制；真实项目必须接入获批目录。数据库规范保留设计决策和强制/推荐层级，但具体项目阈值、命名和组件以目标工程为准。
+1. [完整功能交付](.agents/skills/mgt-feature-delivery/SKILL.md)：记录需求、原型、设计、开发批次与最终功能性测试。它区分本期核心功能、后续能力和待确认项，便于中断后继续，也避免把规划误写成已完成。
+2. [局部修改](.agents/skills/mgt-modification/SKILL.md)：从运行路由或接口入口开始定位，围绕实际调用链做最小修改。对于 L2 改动，明确受影响契约、兼容性、回滚方式和组合验收。
+3. [数据库设计](.agents/skills/database-design/SKILL.md)：处理字段语义、有限值、索引、SQL 和复杂 Mapper 映射；普通局部 SQL 不被无端升级成完整设计流程。
 
-## English translation
+## 值得展开讨论的设计
 
-The project keeps separate skills for full feature delivery, focused modifications, and database design. It preserves layered implementation rules, dual review, idempotency, source-backed catalog lookup, and risk-based verification. Proprietary catalog entries and component names have been replaced with fictional fixtures or functional roles; production use requires approved project definitions.
+### 1. 需求材料是工程输入，而不是会议纪要
+
+每项功能都有稳定目录和 `index.md`。材料记录事实、决策、范围和验证结论，不粘贴长日志或大段源码。需求发生实质变化时更新当前有效版本并记录影响，让下一轮开发或修改能够追溯“为什么这样做”。
+
+### 2. 风险分级来自契约与运行入口
+
+L0 只适用于目标文件唯一、无动态路由歧义、无接口或数据语义变化的情况。一旦涉及页面入口、公共 DTO、权限、状态机、幂等、双人复核、外部调用或数据库，就按实际影响升级。这样可以避免把“只改几行”误判成低风险。
+
+### 3. 目录查询工具让资料证据可复用也可失效
+
+字段与字典资料不被复制成零散摘要。查询工具只读取相关目录并返回完整匹配行、来源位置和关联提示；查询条件、工具代码或资料内容改变时 fingerprint 会变化，提示使用者重新核验。公开仓库使用虚构目录来演示机制，真实项目必须替换为获批的资料来源。
+
+## 可验证证据
+
+- [目录查询工具](.agents/skills/database-design/scripts/reference_query.py)及其测试覆盖完整值域、关联码、废弃码、未知项、Markdown 表格格式和指纹失效。
+- [虚构审批案例](examples/README.md)展示需求记录、数据模型审查与前后端修改三条工作流如何交接，并列出正常、越权、重复、并发和失败场景所需的验收证据。
+- [项目约定](AGENTS.md)约束 Controller/Service/Mapper 分层、公共能力复用、异常处理和局部验证，避免 Skill 脱离既有工程上下文。
+
+## English overview
+
+This project demonstrates three cooperating workflows for an admin console: feature delivery, focused changes, and database design. The key ideas are to preserve the active requirements as engineering input, classify risk by contracts and runtime entry points instead of diff size, and use source-traceable catalog lookups whose evidence expires when the source changes. Public catalogs and cases are fictional fixtures; the workflow and verification logic are preserved.

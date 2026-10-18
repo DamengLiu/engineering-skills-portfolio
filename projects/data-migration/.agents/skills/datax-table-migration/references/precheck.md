@@ -84,8 +84,3 @@
 - 不在本表中输出单表或整批耗时评估。
 
 全部必检项为 `通过` 时，前检状态才是 `迁移前检通过`；否则为 `迁移前检失败`。
-
-
-## 3.7 英文译文 | English translation
-
-This reference belongs to the DataX migration project. Follow the Chinese workflow above for scope, mapping, execution, and verification. Confirm project-specific field semantics and obtain explicit authorization before database access or migration execution.

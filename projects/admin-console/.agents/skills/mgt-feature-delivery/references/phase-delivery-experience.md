@@ -13,7 +13,3 @@
 ## 2. 使用边界
 
 只在当前功能确有相似演进时参考，以当前需求、代码和用户决定为准，不自动增加字段或框架能力。
-
-## 3. English translation
-
-This fictional approval-flow example captures how an initial query/create/display slice may expand into detail, editing, soft deletion, pagination, import/export, bulk work, idempotency, external status, and dual review. Record changes to the active requirements and verify each accepted scope separately.

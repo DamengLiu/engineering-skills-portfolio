@@ -57,8 +57,3 @@
 - 重复键、必填字段、固定值和关键业务字段检查通过。
 
 必要校验全部通过时先报告 `迁移校验通过`。任一必要条件未满足，报告 `迁移校验失败` 或 `迁移执行失败`，并提供可直接粘贴的人工核验 SQL。
-
-
-## 4.5 英文译文 | English translation
-
-This reference belongs to the DataX migration project. Follow the Chinese workflow above for scope, mapping, execution, and verification. Confirm project-specific field semantics and obtain explicit authorization before database access or migration execution.

@@ -36,8 +36,3 @@ mapping 说明预期规则，代码说明实现，日志或经授权查询说明
 需要用户在目标环境执行时，按源端关联和筛选、去重或转换、目标实际结果分别给出完整只读 SQL，写明执行库、已代入的本次参数及如何解释结果；若数据库类型或运行参数未确认，先列出缺口并询问，不猜测语法或数值。
 
 证据足以解释本次范围内的结果才能下结论。需修改时转入 [变更影响与修改](02-change-impact.md)，只要求分析时在此交付。相似信号按需查阅 [错误模式集](../../datax-table-migration/references/failure-patterns.md)，不套用旧表结论。
-
-
-## 1.4 英文译文 | English translation
-
-This reference belongs to the DataX migration project. Follow the Chinese workflow above for scope, mapping, execution, and verification. Confirm project-specific field semantics and obtain explicit authorization before database access or migration execution.

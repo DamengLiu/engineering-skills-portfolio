@@ -18,8 +18,3 @@
 ## 2.3 作出启动判断
 
 本次列为必需的前检项全部成功时，前检阶段记 `Success`。必需项失败或结果缺失时记 `Failure`，不启动该批次。未列入本次范围的数据检查写“暂缓/未执行”、原因及待办；它不否定已经完成的静态检查。需要运行前耗时预评估时，单独确定依据和口径；依据不足写“暂无法可靠估算”。
-
-
-## 2.4 英文译文 | English translation
-
-This reference belongs to the DataX migration project. Follow the Chinese workflow above for scope, mapping, execution, and verification. Confirm project-specific field semantics and obtain explicit authorization before database access or migration execution.

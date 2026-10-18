@@ -25,8 +25,3 @@ py .agents/skills/datax-table-migration/scripts/check_artifacts.py <目标表目
 数据库前检、DataX 执行和迁后查询须取得对应环境、对象、范围和动作授权。按需读取 [迁移前检](../../datax-table-migration/references/precheck.md) 与 [迁移校验](../../datax-table-migration/references/verification.md)，复用未修改文件的有效检查结果。
 
 交付问题依据、实际修改文件、mapping 与运行影响、已完成检查及结果、未执行检查和剩余风险。关键业务规则未确认时只交付分析或方案；局部检查不能替代完整交付或真实迁移验收。
-
-
-## 3.4 英文译文 | English translation
-
-This reference belongs to the DataX migration project. Follow the Chinese workflow above for scope, mapping, execution, and verification. Confirm project-specific field semantics and obtain explicit authorization before database access or migration execution.

@@ -43,7 +43,3 @@
 ## 持久层边界
 
 数据库设计触发范围以 `AGENTS.md` 为准。普通 SQL、Entity/PO、Mapper/XML 局部调整只检查数据库规范适用章节和受影响映射；结构、字段语义、值域、约束及复杂映射方案变化进入 `database-design`。本文件负责业务语义和调用影响，相关组件统一按 `AGENTS.md` 使用。
-
-## 英文译文 | English translation
-
-This reference describes project-specific decisions and checks for the workflow above. The public examples use fictional names; confirm the actual component, field, and policy in the target project before applying them.

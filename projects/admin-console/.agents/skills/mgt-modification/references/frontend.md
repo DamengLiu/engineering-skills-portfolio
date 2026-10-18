@@ -62,7 +62,3 @@ route name / route path / route matched
 ## 前端边界
 
 优先复用同目录或直接相邻页面的既有组件和样式。纯前端展示不得顺带改变接口或数据语义；发现后端缺口时标记影响并按主 Skill 路由到后端。
-
-## 英文译文 | English translation
-
-This reference describes project-specific decisions and checks for the workflow above. The public examples use fictional names; confirm the actual component, field, and policy in the target project before applying them.

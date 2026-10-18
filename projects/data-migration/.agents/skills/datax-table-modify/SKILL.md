@@ -36,8 +36,3 @@ description: 修改或排查已有的单表 DataX 迁移交付物，定位运行
 ## 4. 完成条件
 
 分析交付证据、结论及待确认项；修改交付实际文件、mapping 与运行影响、检查结果及剩余风险。局部静态检查通过只说明其覆盖范围，迁移完成仍须满足项目级执行和数据核验条件。
-
-
-## 5. 英文译文 | English translation
-
-This reference belongs to the DataX migration project. Follow the Chinese workflow above for scope, mapping, execution, and verification. Confirm project-specific field semantics and obtain explicit authorization before database access or migration execution.

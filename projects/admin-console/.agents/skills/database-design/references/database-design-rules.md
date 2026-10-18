@@ -64,7 +64,3 @@ update_time datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMEST
 - 【强制】数据库账号不得明文公开于代码、配置、Wiki 等；不同线上业务不得共用账号，生产账号和权限须经 DBA 同意。
 - 【强制】生产应用默认仅授予 `SELECT`、`INSERT`、`UPDATE`；`DELETE`、DDL 等需 DBA 审核。
 - 【推荐】分库分表的历史数据清理方案提前与 DBA 沟通；历史数据清理以已确认的保留期限、归档结果和数据库评审为前提。
-
-## 英文译文 | English translation
-
-This reference describes project-specific decisions and checks for the workflow above. The public examples use fictional names; confirm the actual component, field, and policy in the target project before applying them.

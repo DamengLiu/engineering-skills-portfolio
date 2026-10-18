@@ -28,7 +28,3 @@
 | 问题 | 阻塞的决定 | 当前处理 |
 | --- | --- | --- |
 |  |  |  |
-
-## 英文译文 | English translation
-
-This reference describes project-specific decisions and checks for the workflow above. The public examples use fictional names; confirm the actual component, field, and policy in the target project before applying them.
