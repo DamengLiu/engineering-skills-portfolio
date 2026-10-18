@@ -1,12 +1,10 @@
 # 工程实践作品集 | Engineering Skills Portfolio
 
-这份作品集展示我如何把 Agent 参与的工程任务做成可定位、可交接、可验证的工作流。它包含两个由我设计并沉淀的脱敏项目：DataX 数据迁移与管理后台功能交付。公开版保留原项目的规则分工、关键判断和离线检查方式；名称、字段与示例数据已泛化或虚构。
+这里收录两组脱敏后的工程实践：DataX 数据迁移与企业管理平台功能交付。材料保留了原项目中的规则分工、关键判断和离线检查方式；项目名称、领域对象、字段和示例数据均已泛化或虚构。
 
-## 内容与适合阅读的对象
+## 从这里开始
 
-这份作品集的目标是让技术面试官和同行依据设计决策与可检查的材料，判断我能否把高风险工程任务约束为可交接、可验证的流程；准备复用 Skill 的读者也能判断适用性并找到试用入口。主要读者是关注数据正确性、后端与前端协作、平台工程或 Agent 工程化的技术读者。
-
-| 你希望做什么 | 建议从哪里开始 | 读后可得到什么 |
+| 想了解什么 | 从哪里开始 | 可以看到什么 |
 | --- | --- | --- |
 | 评估工程设计 | 本页的整体设计和两个代表案例 | 看到问题、关键取舍、阶段门禁与完成口径 |
 | 核查具体依据 | 两个项目的 `AGENTS.md`、代表 Skill、reference 与离线示例 | 区分规则、可复验检查、案例记录和未验证的运行效果 |
@@ -17,9 +15,7 @@
 | [DataX 数据迁移](data-migration/README.md) | 单表新建、已有作业修改、批量编排 | [单表新建](data-migration/.agents/skills/datax-table-migration/SKILL.md)：从需求澄清到迁后校验的五阶段 | [单表修改](data-migration/.agents/skills/datax-table-modify/SKILL.md)追踪已有作业的直接影响；[批量迁移](data-migration/.agents/skills/datax-batch-migration/SKILL.md)管理任务清单、顺序和批次结论，不重定义单表映射 |
 | [企业管理平台](enterprise-management-platform/README.md) | 完整交付、局部修改、数据库设计 | [局部修改](enterprise-management-platform/.agents/skills/mgt-modification/SKILL.md)：沿实际入口定位、控制影响并分级验收 | [完整功能交付](enterprise-management-platform/.agents/skills/mgt-feature-delivery/SKILL.md)维护需求与开发批次；[数据库设计](enterprise-management-platform/.agents/skills/database-design/SKILL.md)管理结构、字段语义和完整值域 |
 
-两个项目均提供项目级 `AGENTS.md`、场景 Skill、按需读取的 reference，以及可审阅的样例或离线工具。以下只深入讲解每个项目的一个 Skill，以具体决策说明整体设计。
-
-这两组工作流的场景分工、项目约束、Skill、离线检查和公开案例由我设计、编写与迭代。它们复用 DataX、Spring/MyBatis 等既有技术和项目公共能力；作品集展示的是我如何围绕这些能力设计工程流程与验收边界。
+两个项目均提供项目级 `AGENTS.md`、场景 Skill、按需读取的 reference，以及可审阅的样例或离线工具。下文各选一个代表 Skill，顺着实际决策展开整体设计。
 
 ## 整体设计：规则分层，任务闭环
 
