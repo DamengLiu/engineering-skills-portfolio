@@ -13,6 +13,12 @@
 | 如何避免把小修复变成隐性回归？ | [单表修改 Skill](.agents/skills/datax-table-modify/SKILL.md)先确认实际入口，再追踪 mapping、查询、Writer、Shell 和核验 SQL 的直接影响。 |
 | 如何让批量执行不掩盖单表问题？ | [批量迁移 Skill](.agents/skills/datax-batch-migration/SKILL.md)只编排已确认的单表作业，保留逐表前检、失败停止和批次结论。 |
 
+## 复用入口
+
+先阅读本项目的 [AGENTS.md](AGENTS.md)，再按下面的“三条工作流”选择主 Skill。新建单表至少需要可靠的源/目标结构、当前业务规则、参考作业、运行范围、键和写入/重跑策略；已有作业修改还需实际调用入口、现有 mapping（如有）与故障或变更证据；批量编排需要已确认的单表作业及任务清单。目标环境的数据库连接、DataX 配置和真实业务规则须由使用者在自己的项目中提供，公开副本不能直接执行真实迁移。
+
+希望先检查方法而不接入数据库，可运行[虚构订单案例](examples/README.md)中的离线命令：它展示列顺序正确时通过、Writer 错列时失败。新建单表的预期交付是 mapping、逐来源 Python 作业、Shell 和核验 SQL；数据库前检、迁移执行与迁后校验各有独立的授权和完成条件。
+
 ## 三条工作流
 
 1. [新建单表](.agents/skills/datax-table-migration/SKILL.md)：从需求基线、五列字段映射到 Python、Shell、核验 SQL 四类交付物。它把“需求确认完成”“脚本生成完成”“迁移前检通过”“迁移执行成功”“迁移校验通过”作为不同状态，防止静态检查越级代表真实运行。
@@ -41,4 +47,4 @@
 
 ## English overview
 
-This project preserves three distinct migration workflows: creating a single-table job, safely changing an existing job, and coordinating a batch. Its main idea is to keep an approved mapping as the table-level source of truth and to distinguish static structural checks from preflight, execution, and live data reconciliation. The included examples and tests are fictional and offline only.
+This project preserves three distinct migration workflows: creating a single-table job, safely changing an existing job, and coordinating a batch. Its main idea is to keep an approved mapping as the table-level source of truth and to distinguish static structural checks from preflight, execution, and live data reconciliation. Readers need their own approved schemas, rules, and runtime configuration to adapt the Skills; the included examples and tests are fictional and offline only.

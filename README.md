@@ -1,10 +1,16 @@
 # 工程实践作品集 | Engineering Skills Portfolio
 
-这份作品集展示我如何把 Agent 参与的工程任务做成可定位、可交接、可验证的工作流。它包含两个脱敏项目：DataX 数据迁移与管理后台功能交付。公开版保留原项目的规则分工、关键判断和离线检查方式；名称、字段与示例数据已泛化或虚构。
+这份作品集展示我如何把 Agent 参与的工程任务做成可定位、可交接、可验证的工作流。它包含两个由我设计并沉淀的脱敏项目：DataX 数据迁移与管理后台功能交付。公开版保留原项目的规则分工、关键判断和离线检查方式；名称、字段与示例数据已泛化或虚构。
 
 ## 内容与适合阅读的对象
 
-适合关注数据正确性、后端与前端协作、平台工程或 Agent 工程化的技术面试官和同行阅读。这里重点说明**为什么这样设计、规则怎样落到任务、现有证据能证明什么**。想先了解全貌，可读本页；想检查可执行细节，可进入项目的 `AGENTS.md`、代表 Skill 和示例。
+这份作品集的目标是让技术面试官和同行依据设计决策与可检查的材料，判断我能否把高风险工程任务约束为可交接、可验证的流程；准备复用 Skill 的读者也能判断适用性并找到试用入口。主要读者是关注数据正确性、后端与前端协作、平台工程或 Agent 工程化的技术读者。
+
+| 你希望做什么 | 建议从哪里开始 | 读后可得到什么 |
+| --- | --- | --- |
+| 评估工程设计 | 本页的整体设计和两个代表案例 | 看到问题、关键取舍、阶段门禁与完成口径 |
+| 核查具体依据 | 两个项目的 `AGENTS.md`、代表 Skill、reference 与离线示例 | 区分规则、可复验检查、案例记录和未验证的运行效果 |
+| 判断能否复用 | [数据迁移项目的复用入口](projects/data-migration/README.md#复用入口)或[管理后台项目的复用入口](projects/admin-console/README.md#复用入口) | 选择场景、准备项目资料，并了解公开副本的限制 |
 
 | 项目 | 工程内容 | 本页展开的代表 Skill | 其他 Skill 的职责 |
 | --- | --- | --- | --- |
@@ -12,6 +18,8 @@
 | [管理后台功能交付](projects/admin-console/README.md) | 完整交付、局部修改、数据库设计 | [局部修改](projects/admin-console/.agents/skills/mgt-modification/SKILL.md)：沿实际入口定位、控制影响并分级验收 | [完整功能交付](projects/admin-console/.agents/skills/mgt-feature-delivery/SKILL.md)维护需求与开发批次；[数据库设计](projects/admin-console/.agents/skills/database-design/SKILL.md)管理结构、字段语义和完整值域 |
 
 两个项目均提供项目级 `AGENTS.md`、场景 Skill、按需读取的 reference，以及可审阅的样例或离线工具。以下只深入讲解每个项目的一个 Skill，以具体决策说明整体设计。
+
+这两组工作流的场景分工、项目约束、Skill、离线检查和公开案例由我设计、编写与迭代。它们复用 DataX、Spring/MyBatis 等既有技术和项目公共能力；作品集展示的是我如何围绕这些能力设计工程流程与验收边界。
 
 ## 整体设计：规则分层，任务闭环
 
@@ -49,6 +57,8 @@
 | 4. 迁移执行 | 核对环境、对象、范围、动作的明确授权，以及已通过的前检 | 作业正常结束且 DataX 错误记录为 0，才得出“迁移执行成功”；这还不是“数据迁移完成” |
 | 5. 迁后校验 | 使用同一 mapping 规定的范围、键和业务规则核对结果 | 核对数量关系、重复键、必填、固定值及关键业务字段；多来源过滤或覆盖时不能机械比较两边总数。执行与必要校验均通过，才报告“数据迁移完成” |
 
+我选择在脚本前保存当前表的 mapping：这增加了需求确认的前置工作，却让多来源优先级、业务键和重跑范围有了共同依据。生成后再把结构检查和语义复核分开，避免“Reader 与 Writer 列数相同”掩盖码值或固定值错误。
+
 五阶段的关键不是增加表单，而是防止上一阶段的不确定性被下一阶段当成事实。[虚构订单案例](projects/data-migration/examples/README.md)故意把 Writer 一列改错：离线测试会拒绝这个结构错误。案例同时保留金额、状态和时间转换的语义问题，提醒读者结构检查无法证明转换值正确。[错误模式集](projects/data-migration/.agents/skills/datax-table-migration/references/failure-patterns.md)还记录日期参数在 Shell 与作业间丢失、作业成功但脏数据未核验等失效条件；这些模式是排查线索，最终结论仍须回到当前表证据。
 
 ## 案例二：管理后台局部修改的决策过程
@@ -62,6 +72,8 @@
 | 3. 按影响读取资料 | 页面、后端、验证和历史案例各按需读取；字段与字典查询保留完整匹配值域和来源；结构或语义变化才进入完整数据库设计 | 形成受影响的调用链、字段含义和验证范围；普通 SQL 局部调整只查适用规范 |
 | 4. 受控实施 | 复用项目既有组件与分层，只改必要文件。L2 进一步明确接口契约、兼容、权限、状态、双人复核、回滚和持久化影响 | 最终差异与授权目标一致；出现意外差异时停止相关写入并核查 |
 | 5. 分级验收 | L1 验证目标页面或最小接口；L2 组合覆盖前后端、权限、状态、重复操作和再次查询后的回显 | 报告“已完成且已验证”“已实现未运行验证”“仅方案或 SQL”或“阻塞未完成”，不把局部通过扩写为整链路通过 |
+
+局部修改若只凭菜单名寻找组件，可能几行代码都改对了，却改在另一个同名页面上。我把运行 URL、route、组件和 API 的对应关系设为写入前证据：定位多花一步，换来明确的修改对象。涉及双人复核时，先检查项目已有能力与认证上下文，再决定是否需要新链路；复用框架可以避免重复实现，但必须把操作人、复核人和生效状态逐项验清。
 
 [案例 C08](projects/admin-console/.agents/skills/mgt-modification/references/case-patterns.md)记录了根据菜单或目录猜组件，结果改到同名页面的失效模式；因此“页面身份证”成为写入前的约束。[案例 C03](projects/admin-console/.agents/skills/mgt-modification/references/case-patterns.md)说明双人复核场景应先查已有框架能力，并区分登录操作人与复核人；验收须检查权限、状态和最终数据。公开案例是脱敏的问题模式与验收方法，不冒充本仓库中可运行的后台应用或生产验收结果。
 
@@ -81,6 +93,8 @@
 
 这两个项目沉淀了四种可迁移做法：把共同约束与场景步骤分开维护；用当前任务的事实文件或真实入口代替模型猜测；让阶段产物带着检查结论交给下一阶段；按风险和证据范围报告完成状态。迁移项目重在数据语义和运行门禁，后台项目重在入口证明、公共能力复用与联动验收。
 
+证据分三类呈现：Skill 与 `AGENTS.md` 说明**设计规则**；离线脚本和测试给出**可复验的局部结果**；脱敏案例记录**问题模式与验收思路**。本仓库没有可公开复验的生产迁移或后台端到端运行结果，因此不把前两类证据扩大为真实运行成效。
+
 仓库提供可运行的**离线证据**。以下命令使用虚构样例或临时数据，不连接数据库、不执行 DataX，也不启动管理后台：
 
 ```bash
@@ -93,4 +107,4 @@ python -X utf8 -m unittest discover -s projects/admin-console/.agents/skills/dat
 
 ## English overview
 
-This portfolio presents two sanitized engineering projects through one representative Skill each: a five-stage DataX single-table migration and a risk-based admin-console modification workflow. Project-level `AGENTS.md` files set shared constraints; scenario Skills define decisions and handoffs; references and offline tools provide details when needed. The included tests support only their stated offline checks. Live migration, application behavior, and quantitative productivity gains are not claimed.
+This portfolio presents two engineering workflows I designed and documented through one representative Skill each: a five-stage DataX single-table migration and a risk-based admin-console modification workflow. Project-level `AGENTS.md` files set shared constraints; scenario Skills define decisions and handoffs; references and offline tools provide details when needed. Readers can inspect the design, reproduce the offline checks, or assess what is needed to adapt the Skills. Live migration, application behavior, and quantitative productivity gains are not claimed.
