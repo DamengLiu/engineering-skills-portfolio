@@ -25,8 +25,8 @@
 在仓库根目录运行：
 
 ```bash
-python -X utf8 projects/data-migration/examples/check_job_columns.py projects/data-migration/examples/mapping.csv projects/data-migration/examples/job-manifest.json
-python -X utf8 -m unittest discover -s projects/data-migration/examples -p "test_*.py"
+python -X utf8 data-migration/examples/check_job_columns.py data-migration/examples/mapping.csv data-migration/examples/job-manifest.json
+python -X utf8 -m unittest discover -s data-migration/examples -p "test_*.py"
 ```
 
 第一条命令验证当前样例的列顺序一致；两项测试覆盖正确配置与故意篡改一个 Writer 字段后的失败结果。通过这些检查只能得出“静态列关系正确”，不能得出转换语义、真实记录数或数据库结果正确。

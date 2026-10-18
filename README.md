@@ -10,12 +10,12 @@
 | --- | --- | --- |
 | 评估工程设计 | 本页的整体设计和两个代表案例 | 看到问题、关键取舍、阶段门禁与完成口径 |
 | 核查具体依据 | 两个项目的 `AGENTS.md`、代表 Skill、reference 与离线示例 | 区分规则、可复验检查、案例记录和未验证的运行效果 |
-| 判断能否复用 | [数据迁移项目的复用入口](projects/data-migration/README.md#复用入口)或[管理后台项目的复用入口](projects/admin-console/README.md#复用入口) | 选择场景、准备项目资料，并了解公开副本的限制 |
+| 判断能否复用 | [数据迁移项目的复用入口](data-migration/README.md#复用入口)或[企业管理平台项目的复用入口](enterprise-management-platform/README.md#复用入口) | 选择场景、准备项目资料，并了解公开副本的限制 |
 
 | 项目 | 工程内容 | 本页展开的代表 Skill | 其他 Skill 的职责 |
 | --- | --- | --- | --- |
-| [DataX 数据迁移](projects/data-migration/README.md) | 单表新建、已有作业修改、批量编排 | [单表新建](projects/data-migration/.agents/skills/datax-table-migration/SKILL.md)：从需求澄清到迁后校验的五阶段 | [单表修改](projects/data-migration/.agents/skills/datax-table-modify/SKILL.md)追踪已有作业的直接影响；[批量迁移](projects/data-migration/.agents/skills/datax-batch-migration/SKILL.md)管理任务清单、顺序和批次结论，不重定义单表映射 |
-| [管理后台功能交付](projects/admin-console/README.md) | 完整交付、局部修改、数据库设计 | [局部修改](projects/admin-console/.agents/skills/mgt-modification/SKILL.md)：沿实际入口定位、控制影响并分级验收 | [完整功能交付](projects/admin-console/.agents/skills/mgt-feature-delivery/SKILL.md)维护需求与开发批次；[数据库设计](projects/admin-console/.agents/skills/database-design/SKILL.md)管理结构、字段语义和完整值域 |
+| [DataX 数据迁移](data-migration/README.md) | 单表新建、已有作业修改、批量编排 | [单表新建](data-migration/.agents/skills/datax-table-migration/SKILL.md)：从需求澄清到迁后校验的五阶段 | [单表修改](data-migration/.agents/skills/datax-table-modify/SKILL.md)追踪已有作业的直接影响；[批量迁移](data-migration/.agents/skills/datax-batch-migration/SKILL.md)管理任务清单、顺序和批次结论，不重定义单表映射 |
+| [企业管理平台](enterprise-management-platform/README.md) | 完整交付、局部修改、数据库设计 | [局部修改](enterprise-management-platform/.agents/skills/mgt-modification/SKILL.md)：沿实际入口定位、控制影响并分级验收 | [完整功能交付](enterprise-management-platform/.agents/skills/mgt-feature-delivery/SKILL.md)维护需求与开发批次；[数据库设计](enterprise-management-platform/.agents/skills/database-design/SKILL.md)管理结构、字段语义和完整值域 |
 
 两个项目均提供项目级 `AGENTS.md`、场景 Skill、按需读取的 reference，以及可审阅的样例或离线工具。以下只深入讲解每个项目的一个 Skill，以具体决策说明整体设计。
 
@@ -31,7 +31,7 @@
 按需读取的 reference、模板与离线检查脚本
 ```
 
-[`DataX AGENTS.md`](projects/data-migration/AGENTS.md)把数据库授权、Python/Shell 质量和“迁移完成”的口径放在项目层；[`管理后台 AGENTS.md`](projects/admin-console/AGENTS.md)约束分层、公共组件复用、接口兼容、权限和验证。两者都不替场景 Skill 决定具体步骤。场景 Skill 选择当前任务的入口与停止条件；reference 承载阶段细则；脚本处理适合确定性计算的检查。当前表的 mapping、当前需求和真实运行入口仍来自任务证据，不能被通用规则代替。
+[`DataX AGENTS.md`](data-migration/AGENTS.md)把数据库授权、Python/Shell 质量和“迁移完成”的口径放在项目层；[`企业管理平台 AGENTS.md`](enterprise-management-platform/AGENTS.md)约束分层、公共组件复用、接口兼容、权限和验证。两者都不替场景 Skill 决定具体步骤。场景 Skill 选择当前任务的入口与停止条件；reference 承载阶段细则；脚本处理适合确定性计算的检查。当前表的 mapping、当前需求和真实运行入口仍来自任务证据，不能被通用规则代替。
 
 这样分工解决两类常见问题：一是同一权限或完成标准在多个 Skill 中复制后逐渐分叉；二是把所有资料一次塞给 Agent，使当前阶段的关键条件被无关内容淹没。分层并不降低标准：只读分析、文件修改、数据库查询和真实执行仍各按其权限边界判断。
 
@@ -47,23 +47,23 @@
 
 ## 案例一：DataX 单表新建的五阶段
 
-单表迁移最难发现的错误是作业正常结束，却写入了错列、错误码值或错误范围。[原流程保留的五阶段](projects/data-migration/.agents/skills/datax-table-migration/SKILL.md)把这一风险拆成五次有门禁的交接。每个阶段按“输入 → 判断与产物 → 检查 → 下一阶段条件”形成小闭环。
+单表迁移最难发现的错误是作业正常结束，却写入了错列、错误码值或错误范围。[原流程保留的五阶段](data-migration/.agents/skills/datax-table-migration/SKILL.md)把这一风险拆成五次有门禁的交接。每个阶段按“输入 → 判断与产物 → 检查 → 下一阶段条件”形成小闭环。
 
 | 阶段 | 输入与关键判断 | 阶段产物、检查与门禁 |
 | --- | --- | --- |
 | 1. 需求澄清 | 读取可靠源/目标结构、当前已确认规则和参考作业；逐来源做五列映射；区分源业务键、目标业务键与物理主键；确认来源优先级、覆盖范围、重跑与清理、加密和不迁移字段 | 及时保存当前表的 `<target_table>_mapping.md`。目标字段、键、范围或转换仍待确认时标为“需求确认待定”，只交付映射，不生成可运行脚本 |
-| 2. 脚本生成 | 已确认 mapping 是业务基线；每个来源独立生成作业，明确读取、转换、写入和日期传递 | 交付 mapping、DataX Python、Shell、核验 SQL 四类文件。[离线检查器](projects/data-migration/.agents/skills/datax-table-migration/scripts/check_artifacts.py)核对 mapping、查询列、Writer 和日期参数；固定值、码值及条件分支还要单独做[语义映射复核](projects/data-migration/.agents/skills/datax-table-migration/references/semantic-mapping-review.md)。全部必要检查通过才称“脚本生成完成” |
+| 2. 脚本生成 | 已确认 mapping 是业务基线；每个来源独立生成作业，明确读取、转换、写入和日期传递 | 交付 mapping、DataX Python、Shell、核验 SQL 四类文件。[离线检查器](data-migration/.agents/skills/datax-table-migration/scripts/check_artifacts.py)核对 mapping、查询列、Writer 和日期参数；固定值、码值及条件分支还要单独做[语义映射复核](data-migration/.agents/skills/datax-table-migration/references/semantic-mapping-review.md)。全部必要检查通过才称“脚本生成完成” |
 | 3. 迁移前检 | 对照运行环境和待迁数据，核查字段约束、长度精度、必填、日期、值域与键冲突 | 输出结构化前检结果；未执行的查询不能记作 0 或通过。必需条件未满足时停止，不启动 DataX |
 | 4. 迁移执行 | 核对环境、对象、范围、动作的明确授权，以及已通过的前检 | 作业正常结束且 DataX 错误记录为 0，才得出“迁移执行成功”；这还不是“数据迁移完成” |
 | 5. 迁后校验 | 使用同一 mapping 规定的范围、键和业务规则核对结果 | 核对数量关系、重复键、必填、固定值及关键业务字段；多来源过滤或覆盖时不能机械比较两边总数。执行与必要校验均通过，才报告“数据迁移完成” |
 
 我选择在脚本前保存当前表的 mapping：这增加了需求确认的前置工作，却让多来源优先级、业务键和重跑范围有了共同依据。生成后再把结构检查和语义复核分开，避免“Reader 与 Writer 列数相同”掩盖码值或固定值错误。
 
-五阶段的关键不是增加表单，而是防止上一阶段的不确定性被下一阶段当成事实。[虚构订单案例](projects/data-migration/examples/README.md)故意把 Writer 一列改错：离线测试会拒绝这个结构错误。案例同时保留金额、状态和时间转换的语义问题，提醒读者结构检查无法证明转换值正确。[错误模式集](projects/data-migration/.agents/skills/datax-table-migration/references/failure-patterns.md)还记录日期参数在 Shell 与作业间丢失、作业成功但脏数据未核验等失效条件；这些模式是排查线索，最终结论仍须回到当前表证据。
+五阶段的关键不是增加表单，而是防止上一阶段的不确定性被下一阶段当成事实。[虚构订单案例](data-migration/examples/README.md)故意把 Writer 一列改错：离线测试会拒绝这个结构错误。案例同时保留金额、状态和时间转换的语义问题，提醒读者结构检查无法证明转换值正确。[错误模式集](data-migration/.agents/skills/datax-table-migration/references/failure-patterns.md)还记录日期参数在 Shell 与作业间丢失、作业成功但脏数据未核验等失效条件；这些模式是排查线索，最终结论仍须回到当前表证据。
 
 ## 案例二：管理后台局部修改的决策过程
 
-后台的“小改动”可能落在同名动态页面、公共接口、权限或状态转换上。这里按[局部修改 Skill](projects/admin-console/.agents/skills/mgt-modification/SKILL.md)的**决策顺序**组织阅读，不把它改称原文并不存在的固定五阶段。
+企业管理平台的“小改动”可能落在同名动态页面、公共接口、权限或状态转换上。这里按[局部修改 Skill](enterprise-management-platform/.agents/skills/mgt-modification/SKILL.md)的**决策顺序**组织阅读，不把它改称原文并不存在的固定五阶段。
 
 | 决策环节 | 必须确认的细节 | 交接与停止条件 |
 | --- | --- | --- |
@@ -75,7 +75,7 @@
 
 局部修改若只凭菜单名寻找组件，可能几行代码都改对了，却改在另一个同名页面上。我把运行 URL、route、组件和 API 的对应关系设为写入前证据：定位多花一步，换来明确的修改对象。涉及双人复核时，先检查项目已有能力与认证上下文，再决定是否需要新链路；复用框架可以避免重复实现，但必须把操作人、复核人和生效状态逐项验清。
 
-[案例 C08](projects/admin-console/.agents/skills/mgt-modification/references/case-patterns.md)记录了根据菜单或目录猜组件，结果改到同名页面的失效模式；因此“页面身份证”成为写入前的约束。[案例 C03](projects/admin-console/.agents/skills/mgt-modification/references/case-patterns.md)说明双人复核场景应先查已有框架能力，并区分登录操作人与复核人；验收须检查权限、状态和最终数据。这些内容来自实际工程中沉淀的问题模式，已替换功能名称、对象和私有框架标识；它们说明设计与验收方法，不冒充本仓库中可运行的后台应用或生产验收结果。
+[案例 C08](enterprise-management-platform/.agents/skills/mgt-modification/references/case-patterns.md)记录了根据菜单或目录猜组件，结果改到同名页面的失效模式；因此“页面身份证”成为写入前的约束。[案例 C03](enterprise-management-platform/.agents/skills/mgt-modification/references/case-patterns.md)说明双人复核场景应先查已有框架能力，并区分登录操作人与复核人；验收须检查权限、状态和最终数据。这些内容来自实际工程中沉淀的问题模式，已替换功能名称、对象和私有框架标识；它们说明设计与验收方法，不冒充本仓库中可运行的后台应用或生产验收结果。
 
 ## 从两个案例提炼的最佳实践
 
@@ -98,13 +98,13 @@
 仓库提供可运行的**离线证据**。以下命令使用虚构样例或临时数据，不连接数据库、不执行 DataX，也不启动管理后台：
 
 ```bash
-python -X utf8 projects/data-migration/examples/check_job_columns.py projects/data-migration/examples/mapping.csv projects/data-migration/examples/job-manifest.json
-python -X utf8 -m unittest discover -s projects/data-migration/examples -p "test_*.py"
-python -X utf8 -m unittest discover -s projects/admin-console/.agents/skills/database-design/scripts -p "test_*.py"
+python -X utf8 data-migration/examples/check_job_columns.py data-migration/examples/mapping.csv data-migration/examples/job-manifest.json
+python -X utf8 -m unittest discover -s data-migration/examples -p "test_*.py"
+python -X utf8 -m unittest discover -s enterprise-management-platform/.agents/skills/database-design/scripts -p "test_*.py"
 ```
 
-迁移项目还包含[单表交付物检查器](projects/data-migration/.agents/skills/datax-table-migration/scripts/check_artifacts.py)与[批量交付物检查器](projects/data-migration/.agents/skills/datax-batch-migration/scripts/check_batch_artifacts.py)的自检入口；后台项目包含[字段与字典目录查询工具](projects/admin-console/.agents/skills/database-design/scripts/reference_query.py)。它们证明相应的离线规则可执行，不能证明真实系统的运行效果。原工程和原 Skill 未因公开作品集而修改；公开示例不含客户或生产数据。
+迁移项目还包含[单表交付物检查器](data-migration/.agents/skills/datax-table-migration/scripts/check_artifacts.py)与[批量交付物检查器](data-migration/.agents/skills/datax-batch-migration/scripts/check_batch_artifacts.py)的自检入口；企业管理平台项目包含[字段与字典目录查询工具](enterprise-management-platform/.agents/skills/database-design/scripts/reference_query.py)。它们证明相应的离线规则可执行，不能证明真实系统的运行效果。原工程和原 Skill 未因公开作品集而修改；公开示例不含客户或生产数据。
 
 ## English overview
 
-This portfolio presents two engineering workflows I designed and documented through one representative Skill each: a five-stage DataX single-table migration and a risk-based admin-console modification workflow. Project-level `AGENTS.md` files set shared constraints; scenario Skills define decisions and handoffs; references and offline tools provide details when needed. Readers can inspect the design, reproduce the offline checks, or assess what is needed to adapt the Skills. Live migration, application behavior, and quantitative productivity gains are not claimed.
+This portfolio presents two engineering workflows I designed and documented through one representative Skill each: a five-stage DataX single-table migration and a risk-based enterprise-management-platform modification workflow. Project-level `AGENTS.md` files set shared constraints; scenario Skills define decisions and handoffs; references and offline tools provide details when needed. Readers can inspect the design, reproduce the offline checks, or assess what is needed to adapt the Skills. Live migration, application behavior, and quantitative productivity gains are not claimed.
