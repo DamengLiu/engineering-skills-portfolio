@@ -1,0 +1,19 @@
+# 分阶段交付样例经验 | Phased Delivery Example
+
+以下是虚构的审批功能演进，用于帮助规划相似功能，不是固定实施顺序，也不代表真实客户项目。
+
+## 1. 可复用观察
+
+- 初版先打通查询、新增和页面展示；后续按确认需求扩展详情、修改、逻辑删除、分页、导入导出和批量操作。PRD 区分当前核心流程与后续能力。
+- DTO、字段、错误码、枚举和前后端接口随迭代收敛。需求材料保留当前有效版本和变化原因。
+- 批量操作、导入导出、下拉选项和外部处理结果具有独立语义；需要时在 PRD 或 API 设计中单独说明。
+- 幂等、逻辑删除恢复、外部系统处理状态和双人复核可作为后续增强；进入设计或实施时记录对现有需求、API 和数据的影响。
+- 每批次运行检查帮助推进；完整功能性测试在整个功能完成后另行验收。
+
+## 2. 使用边界
+
+只在当前功能确有相似演进时参考，以当前需求、代码和用户决定为准，不自动增加字段或框架能力。
+
+## 3. English translation
+
+This fictional approval-flow example captures how an initial query/create/display slice may expand into detail, editing, soft deletion, pagination, import/export, bulk work, idempotency, external status, and dual review. Record changes to the active requirements and verify each accepted scope separately.

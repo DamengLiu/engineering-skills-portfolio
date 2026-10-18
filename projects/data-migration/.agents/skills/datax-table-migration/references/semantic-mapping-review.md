@@ -1,0 +1,37 @@
+# 5 语义映射复核
+
+本复核用于包含固定值、码值转换、条件分支、默认值、去重或迁移时间的单表作业。它补足字段数量和列顺序检查无法发现的内容错误。
+
+## 5.1 复核单位
+
+按“来源作业 × 目标字段”复核当前有效 mapping 的每一行。将 SQL 查询表达式、Transformer/Groovy 后处理和 Writer 列序一起看；一个目标字段的最终值可能跨多个位置形成，不能只看 SELECT 别名。
+
+直接映射、明确置空和固定值可逐行确认。转换、条件和生成规则须写出 mapping 规则与实际最终表达式的对应关系。不能从字段名称、相同列数或参考作业推断一致性。
+
+## 5.2 规则的闭环
+
+对每个非直接规则，依次检查：
+
+1. mapping 规定的输入、条件和输出值；
+2. 作业 SQL 或 Python 生成的中间值；
+3. Transformer、Groovy 或其他后处理得到的最终值；
+4. 值域校验、异常处理和核验 SQL 是否接受所有 mapping 允许值，并拒绝 mapping 未允许值。
+
+例如码值 `Stat=1 -> PR04` 同时要求 SQL 生成 `PR04`、后处理白名单允许 `PR04`、核验 SQL 将 `PR04` 视为合法。三处任一不一致即为映射问题，不能以静态列检查通过结案。
+
+## 5.3 重点规则
+
+- 日期、时间和审计时间：确认格式、时区、空值处理及“同一作业统一迁移时间”是否真的由同一个运行时值提供；数据库每行 `CURRENT TIMESTAMP` 不能自动证明统一。
+- 去重和覆盖：分别覆盖完整业务键、空键、同源重复、跨来源优先级和重跑范围。空键不阻断时，去重逻辑不得把多个空键记录合并为一条。
+- 值域映射：逐个检查 mapping 中每个输入码与输出码；未知码的失败或兜底规则也必须一致。
+- 置空和默认值：确认没有有效来源被错误置空、默认值覆盖或后处理改写。
+- 联表取值：核对关联键与 mapping 一致，并把一对多导致重复写入的风险列为前检项。
+
+## 5.4 结论要求
+
+交付时单独说明“结构闭环”和“语义映射复核”的结果。语义复核未执行、无法读取后处理逻辑，或数据库语义仍待验证时，明确写出范围和剩余风险；不得表述为“内容映射一致”。
+
+
+## 5.5 英文译文 | English translation
+
+This reference belongs to the DataX migration project. Follow the Chinese workflow above for scope, mapping, execution, and verification. Confirm project-specific field semantics and obtain explicit authorization before database access or migration execution.

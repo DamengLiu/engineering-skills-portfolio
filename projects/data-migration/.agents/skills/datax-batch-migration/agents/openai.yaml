@@ -1,0 +1,7 @@
+interface:
+  display_name: "DataX 批量表迁移"
+  short_description: "编排独立单表作业，完成批量前检、执行汇总和批次校验"
+  default_prompt: "使用 $datax-batch-migration 设计或检查一组 DataX 单表作业的批量迁移。"
+
+policy:
+  allow_implicit_invocation: false

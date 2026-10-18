@@ -1,0 +1,34 @@
+# 需求澄清：<功能名称>
+
+## 目标与主流程
+
+- 目标：
+- 操作角色：
+- 主流程：
+- 成功结果：
+
+## 本期核心功能
+
+| 功能点 | 说明 | 完成结果 |
+| --- | --- | --- |
+|  |  |  |
+
+## 后续能力
+
+| 能力 | 计划阶段 | 当前结论 |
+| --- | --- | --- |
+|  |  |  |
+
+## 关键规则与边界
+
+-
+
+## 待确认项
+
+| 问题 | 阻塞的决定 | 当前处理 |
+| --- | --- | --- |
+|  |  |  |
+
+## 英文译文 | English translation
+
+This reference describes project-specific decisions and checks for the workflow above. The public examples use fictional names; confirm the actual component, field, and policy in the target project before applying them.

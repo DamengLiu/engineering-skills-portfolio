@@ -1,0 +1,4 @@
+interface:
+  display_name: "管理后台功能交付 | Admin Feature Delivery"
+  short_description: "需求沉淀、分阶段开发与最终测试 | Requirements, phased delivery, and acceptance"
+  default_prompt: "使用 $mgt-feature-delivery 按阶段沉淀并推进本次管理后台功能需求。"

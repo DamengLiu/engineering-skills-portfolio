@@ -1,0 +1,24 @@
+# 2 变更影响与修改
+
+用于已定位问题或明确变更需求，产出最小修改与直接影响说明。
+
+## 2.1 建立基线
+
+读取当前有效 mapping、可靠目标字段资料、相关作业、Shell、核验 SQL 和直接调用处；没有 mapping 时从可靠结构与已确认需求整理依据，不把推测写成现行规则，也不为局部修复自动补建历史交付物。基线同时确认本次运行范围、日期参数或业务筛选、目标写入和重跑策略；涉及清理、覆盖或跳过既有记录时，确认实际规则和授权边界。目标字段资料的尾随 `*` 表示需加密，去除标记后以真实字段名记录。业务规则变化先取得确认，再更新受影响的 mapping 内容。
+
+按实际影响确认上述信息，文案或局部修订不要求重新确认整表。
+
+## 2.2 追踪影响
+
+按实际变更核对关联位置。字段或转换变化时检查逐来源映射、查询输出、Writer 顺序、必填与长度约束、前检和核验 SQL；加密字段变化还要核对 mapping、每个受影响作业的 `ENCRYPT_COLUMNS`、`dx_encrypt` 参数和 transformer 顺序。日期或范围变化时检查 Shell 参数、Python/DataX 渲染、清理条件和源目标核验口径；执行或部署变化时检查调用入口、路径、配置、退出码与日志。多来源还要核对顺序、覆盖与失败后的重跑范围。涉及固定值、码值转换、条件分支、默认值、去重或时间生成时，必须执行[语义映射复核](../../datax-table-migration/references/semantic-mapping-review.md)；字段数量、字段名和 Writer 顺序闭环只证明结构闭环，不能作为内容映射正确的结论。
+
+## 2.3 实施修改
+
+只改完成本次目标必需的文件。已有 `dx_encrypt` 的作业以当前 transformer 位置、参数形式和字段清单为实现基线，不自动重排、替换或批量覆盖。`*` 标记字段与现有 `ENCRYPT_COLUMNS` 不一致时，先报告差异，在本次授权修改 mapping 时记录；只有本次业务规则明确要求增删加密字段时，才同步改动受影响作业。保留有效注释和外部调用方式；规则变化时同步修订失效说明。若新需求涉及异常数据记录与恢复、分片、统一日志等额外能力，先单独完成设计判断，再由本 Skill 落实单表侧修改与验证。
+
+共享规则按需读取 [需求与字段映射](../../datax-table-migration/references/requirements.md) 和 [迁移执行](../../datax-table-migration/references/execution.md)。当前表特有规则留在有效 mapping。
+
+
+## 2.4 英文译文 | English translation
+
+This reference belongs to the DataX migration project. Follow the Chinese workflow above for scope, mapping, execution, and verification. Confirm project-specific field semantics and obtain explicit authorization before database access or migration execution.

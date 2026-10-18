@@ -1,0 +1,4 @@
+interface:
+  display_name: "管理后台修改 | Admin Change"
+  short_description: "页面、接口与权限的受控修改 | Controlled UI, API, and access changes"
+  default_prompt: "使用 $mgt-modification 定位并处理本次管理后台修改，按授权模式受控实施并完成必要验证。"

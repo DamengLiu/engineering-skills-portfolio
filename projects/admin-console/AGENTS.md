@@ -1,0 +1,104 @@
+# AGENTS.md
+
+## 1. Project Overview
+
+本项目示例为基于 Spring Boot / Spring Cloud 的管理后台，包含后端服务、前端应用及公共 SDK 等模块。实际模块名和版本以接入项目为准。
+
+主要技术栈和版本以各模块的 `pom.xml`、`package.json` 与现有工程配置为准。
+
+修改前理解目标功能及必要调用链，查找同类实现，优先复用现有 DTO、Service、Mapper、Enum、工具类和公共框架。只做需求必需的修改，保持架构、风格和接口兼容，不主动增加框架、分层或无关重构。历史实现作为兼容性参考，不机械复制不符合统一规范的写法；发生冲突时说明影响，不擅自改变业务规则。
+
+## 2. Coding Rules
+
+### 2.1 General
+
+- 类名使用 `UpperCamelCase`；方法名、变量名使用 `lowerCamelCase`；常量使用 `UPPER_SNAKE_CASE`。
+- 命名必须表达实际业务含义，避免无明确语义的缩写。
+- 可复用的固定值统一放入常量类；有限且有业务语义的取值使用或补充枚举，不散落硬编码。
+- 优先合并到职责相近的现有类；简单功能不得为形式新增实体、结果对象、工具类或分层。
+
+### 2.2 Controller
+
+Controller 只负责接收请求、基础校验、调用 Service 和返回统一响应，不直接访问 Mapper 或编写复杂业务逻辑。请求封装、DTO/VO、分页、权限和异常按下文接口规范执行。
+
+### 2.3 Service
+
+业务规则、状态判断和流程控制放在 Service 层；一个方法承担一个主要业务职责。多步数据库修改检查现有事务方式，跨模块或外部调用复用 SDK 和公共组件，不擅自改变业务流程，也不将复杂规则放入 Controller 或 Mapper。
+
+### 2.4 Mapper / SQL
+
+- 数据库访问遵循项目现有 MyBatis / MyBatis-Plus / XML 方式。
+- 查询明确列出所需字段，避免 `SELECT *`；参数使用安全绑定方式，禁止字符串拼接产生 SQL 注入风险。
+- 新增 SQL 前检查可复用 Mapper 或查询；可批量处理时避免循环单条查询。
+- 修改公共 SQL 或 Mapper 既有行为前，确认调用方和影响范围。
+
+不得因单个需求修改公共 SQL 的既有业务含义或无必要替换数据库访问模式。
+
+## 3. Common Framework Rules
+
+项目已提供的公共框架或组件原则上统一复用，不自行重复实现或引入同类框架。使用前先确认已有示例和组件说明；能力或用法不明确时先确认，不自行封装替代实现。
+
+### 3.1 外部系统接入
+
+涉及外部系统调用时统一使用项目既有 SDK。不得绕过 SDK 自行实现底层通信，应优先使用 SDK 已提供的提交、查询等能力。
+
+### 3.2 幂等
+
+重复请求、重复提交或重复消费需要幂等控制时，统一使用 项目既有幂等组件。不得自行通过数据库或 Redis 重建一套幂等机制，除非公共组件明确无法满足且已确认。
+
+### 3.3 分布式锁
+
+跨实例并发控制和共享资源竞争统一使用 项目既有分布式锁组件。根据项目配置选择 Redisson 或 database 锁模式；锁粒度围绕真实业务资源，不用 JVM 本地锁替代跨实例锁，也不引入新的分布式锁框架。
+同库多表原子操作使用本地事务，跨库或跨服务的一致性才评估项目既有事务协调组件。锁用于协调并发，事务用于保证提交与回滚，二者不可相互替代。
+
+### 3.4 序列号
+
+统一、有序增长的业务序列号使用 项目既有序列号组件。禁止使用时间戳、随机数、`MAX + 1` 或其他自定义方式替代；能力不匹配时先确认设计。
+
+## 4. Database Rules
+
+所有数据库相关修改均遵守 [数据库规范](.agents/skills/database-design/references/database-design-rules.md) 的适用章节，保留原有“强制／推荐”级别。
+
+- 新建表、字段定义或语义变化、值域变化、索引或约束调整，以及复杂结果映射、动态 SQL、分页或批量方案设计，使用 [database-design](.agents/skills/database-design/SKILL.md)。
+- 不改变字段定义、值域或约束的普通 SQL、Entity/PO、Mapper/XML 局部调整，只检查相关 SQL、ORM、索引规范和受影响映射，不进入完整设计流程。
+- 字段属性、名称和有限值编码按数据库 Skill 路由查询完整来源目录，不另维护摘要或同义编码，不默认全读字段、元语和字典目录。
+- 管理后台 前端、接口、DTO/VO 的字段语义或字典展示由 管理后台 Skill 路由查询对应记录；单纯展示已有值域无需进入数据库设计流程。
+
+## 5. API Rules
+
+新增或修改接口时，保持项目统一的 URL 命名、HTTP Method、请求 DTO、公共请求封装、分页、返回结构、异常处理和权限控制方式。
+
+新增接口前确认可复用 DTO、统一请求/返回结构，以及权限、双签、幂等和外部系统公共能力。不得为了单个需求创建新的统一响应或分页体系、改变公共 DTO 语义或既有接口约定。
+
+修改已有接口时，检查前端与其他模块调用兼容性、请求参数、返回字段、业务异常、权限和调用链影响。
+
+涉及可能重复提交、重复消费、网络重试或外部重复通知的写操作时，必须使用项目统一幂等机制；数据库唯一约束仅作为最终数据一致性兜底，不替代接口幂等。
+
+- 幂等标识应来源于请求语义，并能唯一标识一次业务操作。
+- 幂等控制应在必要的基础校验和业务前置校验通过后执行，避免无效请求占用幂等标识。
+- 重复请求不得重复写库、重复调用外部系统或产生重复业务影响。
+- 接口幂等与业务唯一性分别处理，不互相替代。
+- Controller、Service 等分层职责保持项目既有规范，不因幂等处理破坏分层边界。
+
+## 6. Logging and Exception
+
+日志统一使用 项目既有日志组件，异常捕获和出入参日志处理统一使用 项目既有异常与日志组件。
+
+- 业务日志使用中文、结构化且可检索的描述；关键日志包含业务唯一标识和必要上下文。
+- 使用 `{}` 占位符记录参数；INFO 记录关键过程，WARN 记录可恢复问题，ERROR 记录无法继续或需排查的问题。
+- 禁止 `System.out.println`、敏感信息输出、无意义高频日志和同一异常多层重复打印。
+- 优先复用项目已有业务异常体系；不创建新的全局异常机制，不使用空 `catch`，不吞异常，保留原始异常堆栈。
+- 对外业务和系统异常统一使用项目错误码，通过既有业务异常或系统异常类型返回；不得使用无标准码异常或模块自定义响应码替代。
+- 对外业务提示与内部技术异常分离，不将数据库、网络或框架底层异常直接返回前端。
+
+## 7. Change Scope and Verification
+
+修改前检查工作区状态并保护用户已有差异；发现意外变更先停止相关写入并报告。不删除文件、丢弃用户修改、重置分支或覆盖未检查内容；禁止局部修改触发全仓 lint/format --fix。
+
+完成后检查本次 diff、遗漏 import、重复代码、调试代码、接口和业务行为影响；执行与改动匹配的编译、测试或静态检查。无法验证时明确说明原因和未验证范围。
+
+涉及管理后台页面、接口、权限、双签或前后端联动修改时，使用 `mgt-modification` Skill 进行范围定位、受控实施和分级验收。项目通用规则以本文件为准，Skill 仅补充任务路由和管理后台特有约束。
+
+## 8. 英文译文 | English translation
+
+Inspect the target entry point and comparable code before changing behavior. Preserve the established Controller, Service, Mapper, SDK, error-code, logging, permission, idempotency, and dual-approval conventions. Use the linked database, feature-delivery, and modification skills according to the requested scope. Review the diff and run focused checks; report checks that could not be run. Product-specific component names in this public copy are role descriptions and must be resolved from the target project.

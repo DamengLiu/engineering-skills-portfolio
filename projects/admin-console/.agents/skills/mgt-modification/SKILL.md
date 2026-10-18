@@ -1,0 +1,69 @@
+---
+name: mgt-modification
+description: 用于 管理后台项目页面、接口、权限、双签及前后端联动需求的定位、受控修改和分级验收；纯知识问答或只读代码解释无需使用。
+---
+
+# 管理后台 修改
+
+目标是以最小改动完成范围明确、可审核、可回滚、可验收的 管理后台 修改。项目通用架构、编码、安全、模型和执行时长规则以仓库 `AGENTS.md` 为准，本 Skill 不重复维护。
+
+## 授权模式
+
+按完整请求及已有授权判断；“先分析方案再实施”不属于直接执行，应先交付方案，待用户确认实施后再修改。
+
+- **排查、Review 或审核**：只读定位并报告发现、证据和影响；不写代码，不强制制作实施包。
+- **方案**：提交与任务规模匹配的方案，用户要求实施后再修改。
+- **直接执行**：用户明确要求修改、修复或实施时，完成必要检查后执行。
+- **回滚**：先确认精确目标和当前差异，只撤销本次相关改动。
+
+已有授权在本次目标范围内持续有效；根据用户后续指令更新范围，不因常规实现细节重复确认。数据库写入须有覆盖目标环境和具体动作的明确授权。
+
+## 风险分级与快速通道
+
+| 等级 | 典型范围 | 执行方式 |
+|---|---|---|
+| L0 低风险 | 明确文件内的文案、样式、固定配置 | 确认目标与现有差异后直接做限定修改 |
+| L1 常规 | 单页面字段或交互、局部接口或业务规则 | 定位实际入口和直接调用链后实施 |
+| L2 高风险 | 前后端联动、公共契约、权限、状态、双签、外部调用或数据库设计 | 明确影响、回滚和组合验收；仅当缺失信息阻碍正确实施时询问 |
+
+L0 只有在目标文件唯一、无动态路由歧义、无接口或数据语义变化时成立；任一条件不满足即升级。普通 SQL 或已有映射局部调整按实际业务影响分级，不自动升为 L2。L0 只需限定差异和目标文件或页面确认，无需执行包或无关构建；只读和方案请求不自动进入实施。
+
+## 资料路由
+
+- L0 明确文件的文案、样式修改按入口规则处理；其他页面、路由、查询、列表、详情、弹窗、公共组件或字典展示任务，读取 [references/frontend.md](references/frontend.md)；字典展示还必须查询 `database-design` Skill 的 [dictionary-domains.md](../database-design/references/dictionary-domains.md)。
+- 涉及接口、Controller、DTO/VO、Service、状态、权限、双签、幂等或外部调用，读取 [references/backend.md](references/backend.md)；DTO/VO、接口状态或枚举返回涉及标准字段语义时查询 `database-design` Skill 的 [standard-fields.md](../database-design/references/standard-fields.md)，涉及状态、类别、标志、模式等有限值编码时必须查询其 [dictionary-domains.md](../database-design/references/dictionary-domains.md)。
+- 数据库设计触发边界以 `AGENTS.md` 为准；普通 SQL 或已有映射局部调整只查 [database-design-rules.md](../database-design/references/database-design-rules.md) 的适用章节，不自动进入完整设计流程。
+- L1/L2 准备验证或验收时，按实际影响读取 [references/verification.md](references/verification.md)。
+- 当前现象与历史案例相似时，才读取 [references/case-patterns.md](references/case-patterns.md)。案例只提供排查方向。
+
+跨层需求组合读取相关章节，不加载无关 reference。数据目录先读使用规则和治理说明，再按字段代码或中文名称读取全部匹配记录，包含别名、废弃说明和完整值域，不默认全文加载。
+
+字段和字典的具体定义只在 `database-design` Skill 的 references 中维护，本 Skill 只负责按场景路由，不复制或另建同义编码。
+
+
+字典和标准字段优先使用 [目录查询工具](../database-design/scripts/reference_query.py)，调用及复用规则见 [数据库 Skill 的固定查询工具与证据复用](../database-design/SKILL.md#固定查询工具与证据复用)；这不触发完整数据库设计流程。一次批量查询相关字段，保留工具返回的完整值域、来源和治理说明。
+
+## 搜索与验证预算
+
+1. 修改前运行 `git status --short`，记录并保护用户已有差异。
+2. 首轮使用 URL、路由名、API、字段名等精确标识，并限定目标模块；代码定位首轮最多保留 20 条关键命中，必要时缩小条件后继续；字段目录和完整值域不得按此截断。
+3. 只有零命中或候选不唯一时才逐步扩大目录或搜索词，不直接全仓漫游。
+4. 已确认事实记录结论、适用场景和来源路径/行号；内容指纹仅用于需要重复复用的证据，一次性读取和 L0 修改不强制计算。同一任务上下文仍保留证据，且相关文件和调用范围未变化时复用。可用目录工具 --evidence 批量核对源码指纹；新任务、证据丢失、场景变化或动态运行数据必须重新核验。只读必要上下文，不回传完整文件或长日志。
+5. 集中完成同一范围修改后再运行一次匹配风险的检查；禁止为局部问题执行全仓 `lint/format --fix`。
+6. 验证输出只保留命令、退出码和关键摘要；预计超过 `AGENTS.md` 时限时先报告进度。
+
+## 实施与验证
+
+- L1/L2 实施前简要确定目标、入口、修改文件、关键变化和验证方式；直接执行时作为内部记录，用户要求方案时展示。
+- L2 另说明受影响契约、兼容性和回滚方式；无需为无关维度填表。
+- 只读请求交付发现，方案请求交付方案；已授权实施则完成必要检查后继续。
+- 仅修改必要文件；遇到意外差异停止相关写入并报告。范围内的定位或实现细节变化可更新记录后继续，目标或业务含义不明时才询问。
+- L0 按入口最低检查；L1/L2 按验证资料覆盖实际影响。静态检查不能表述为运行验证通过。
+
+## 输出
+
+使用 `Done / Changed / Verified / Notes`，明确区分：已完成且已验证、已实现未运行验证、仅方案或 SQL、阻塞未完成。用户要求问题单或变更说明时，以最终事实概括原因、方案、影响范围和业务自测，不记录无关的模型或中间返工过程。
+
+## 英文译文 | English translation
+
+Use this skill for the scope stated above. Keep the established workflow, authorization boundary, source evidence, and verification gates. Catalog entries and examples in this public project are illustrative; the target project's approved definitions take precedence.
